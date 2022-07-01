@@ -1,25 +1,25 @@
 package com.vilkov.autoCleaning
+
 import java.io.File
 import java.io.FileReader
 import java.util.Properties
 
 
 fun main(args: Array<String>) {
-    Cleaner().startingAutoClear()
+    startingAutoClear()
 }
 
-class Cleaner() {
-    fun startingAutoClear() {
-        val reader = FileReader("src/main/resources/application.properties")
-        val prop = Properties()
-        prop.load(reader)
-        val rootDirectories = foundAllRootDirectory(prop)
-        for (rootDirectory in rootDirectories) {
-            recursiveDelete(File(rootDirectory))
-        }
-
+fun startingAutoClear() {
+    val reader = FileReader("src/main/resources/application.properties")
+    val prop = Properties()
+    prop.load(reader)
+    val rootDirectories = foundAllRootDirectory(prop)
+    for (rootDirectory in rootDirectories) {
+        recursiveDelete(File(rootDirectory))
     }
+
 }
+
 
 private fun recursiveDelete(file: File) {
     if (!file.exists())
